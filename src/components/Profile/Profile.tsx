@@ -43,7 +43,7 @@ const ProfileHeader = ({
 }: Data["profile"]) => {
   return (
     <div className="profile__header">
-      <ProfileImage circular={true}/>
+      <ProfileImage circular={true} border={true}/>
       <div className="profile__header__lines">
         {lines.map((line, index) => (
           <p key={index}>{line}</p>

@@ -6,3 +6,7 @@
 .profile__header__image__circular img {
   border-radius: 9999px;
 }
+
+.profile__header__image__border img {
+  border: 3px solid var(--red);
+}
