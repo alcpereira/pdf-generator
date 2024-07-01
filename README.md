@@ -11,10 +11,16 @@ The CV PDF Generator is a React app used to build a CV and export it as a PDF.
 
 ```sh
 npm install
-# Starts the vite server
-npm run dev
-# Generate the pdf
+
 npm run pdf
+```
+
+## Development / Debug
+
+If you want to tweak your CV or debug some features you are implementing, you can run the dev server using:
+
+```sh
+npm run dev
 ```
 
 ## Built With
