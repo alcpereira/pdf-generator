@@ -1,4 +1,5 @@
-import data from "./data.json";
+import data from "./data.ts";
+// import data from "./data.json";
 import "./App.css";
 
 import Category from "./components/Category/Category";
@@ -8,7 +9,8 @@ import Profile from "./components/Profile/Profile";
 function App() {
   return (
     <div className="app__container">
-      <Header name={data.header.name} resume={data.header.resume} />
+      <Header name={} resume={data.header.resume} />
+      {/* <Header name={data.header.name} resume={data.header.resume} /> */}
       <div className="app__body">
         <div
           className="app__body-left"

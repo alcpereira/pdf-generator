@@ -1,102 +1,100 @@
 {
   "header": {
-    "name": "Lorem Ipsum",
+    "name": "Miguel Salvador",
     "resume": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla",
-      "Fusce velit urna, euismod ut nibh ut, finibus vestibulum magna."
+      "Software Engineer with 2 years of work experience  focused on Full Stack Development and Automation. Interested in contributing to Open Source applications and help improving creative tools as a hobby. Looking to bring my skills to a tech company with global reach."
     ]
   },
 
   "workExperience": [
     {
-      "position": "Full Stack Software Lopsum",
-      "company": "Neque Porro",
-      "location": "Roma, Roman Empire",
+      "position": "Full Stack Software Engineer",
+      "company": "100Devs",
+      "location": "Remote",
       "type": "Remote",
-      "years": "2022 - Present",
+      "years": "March 2023 — Present",
       "bubbles": [
-        "TypeLorem",
-        "Reactsum",
-        "Reactsum Native",
-        "Ipsum.js",
-        "ClassQL",
-        "Phasux",
-        "AWS Nec"
+        "NodeJS",
+        "React",
+        "Python",
+        "MongoDB",
+        "Typescript",
+        "Golang"
       ],
       "lines": [
         {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
+          "text": "Collaborated with a team of developers to build modern and responsive web applications using best practices.",
           "bulletPoint": true
         },
         {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
+          "text": "Built semantically structured full stack web applications.",
           "bulletPoint": true
         },
         {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
+          "text": "Applied agile methodologies like SCRUM for project management.",
           "bulletPoint": true
         }
       ]
     },
     {
-      "position": "Full Stack Software Lopsum",
-      "company": "Neque Porro",
-      "location": "Roma, Roman Empire",
+      "position": "Full Stack Software Engineer",
+      "company": "CookServeRepeat™",
+      "location": "Remote",
       "type": "Remote",
-      "years": "2022 - Present",
+      "years": "May 2024 - Present",
       "bubbles": [
-        "TypeLorem",
-        "Reactsum",
-        "Reactsum Native",
-        "Ipsum.js",
-        "ClassQL",
-        "Phasux",
-        "AWS Nec"
+        "NodeJS",
+        "React",
+        "Python",
+        "Javascript",
+        "MongoDB",
+        "Typescript"
       ],
       "lines": [
         {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
+          "text": "A comprehensive full-stack application developed to enhance communication among restaurant staff, optimize profitability, and streamline operations by addressing key challenges.",
           "bulletPoint": true
-        },
+        }
+        
+      ]
+    },
+    
+    {
+      "position": "Full Stack Software Engineer",
+      "company": "Ali Baba Restaurant (Freelance)",
+      "location": "Bournemouth, United Kingdom",
+      "type": "Remote",
+      "years": "March 2024 - May 2024",
+      "bubbles": [
+       "HTML",
+        "CSS",
+        "Javascript"
+        
+      ],
+      "lines": [
         {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
+          "text": "A web application specifically developed for a distinguished Turkish restaurant based in Bournemouth.",
           "bulletPoint": true
         }
       ]
-    },
-    {
-      "position": "Full Stack Software Lopsum",
-      "company": "Neque Porro",
-      "location": "Roma, Roman Empire",
+    },{
+      "position": "MiguelInWeb (Freelance)",
+      "company": "Freelance Projects",
+      "location": "Bournemouth, United Kingdom",
       "type": "Remote",
-      "years": "2022 - Present",
+      "years": "February 2021 - March 2023",
       "bubbles": [
-        "TypeLorem",
-        "Reactsum",
-        "Reactsum Native",
-        "Ipsum.js",
-        "ClassQL",
-        "Phasux",
-        "AWS Nec"
+       "Python",
+        "Adobe After Effects",
+        "Javascript"
+        
       ],
       "lines": [
         {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rutrum mi quis tellus ullamcorper, nec tempus nulla imperdiet.",
+          "text": "Developed a suite of custom video tools designed to address repetitive, task-specific processes, significantly streamlining workflows and reducing completion time.",
           "bulletPoint": true
         }
+       
       ]
     }
   ],
@@ -109,99 +107,51 @@
         {
           "text": "Suspendisse lacinia tristique tortor, at laoreet arcu lobortis id.",
           "bulletPoint": false
-        },
-        {
-          "text": "Vivamus fermentum enim a posuere dapibus. Pellentesque sed enim mi.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Cras dictum vestibulum felis vitae consequat. Suspendisse potenti.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Phasellus eu sollicitudin nisi. Vivamus ullamcorper facilisis risus, sed hendrerit lacus scelerisque vel.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Fusce lobortis eros suscipit, viverra lacus in, ullamcorper purus.",
-          "bulletPoint": true
-        }
-      ]
-    },
-    {
-      "name": "",
-      "duration": "3 months project",
-      "bubbles": ["Python", "Flask", "Docker", "Machine Learning", "SQLite"],
-      "lines": [
-        {
-          "text": "Suspendisse lacinia tristique tortor, at laoreet arcu lobortis id.",
-          "bulletPoint": false
-        },
-        {
-          "text": "Vivamus fermentum enim a posuere dapibus. Pellentesque sed enim mi.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Cras dictum vestibulum felis vitae consequat. Suspendisse potenti.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Phasellus eu sollicitudin nisi. Vivamus ullamcorper facilisis risus, sed hendrerit lacus scelerisque vel.",
-          "bulletPoint": true
-        },
-        {
-          "text": "Fusce lobortis eros suscipit, viverra lacus in, ullamcorper purus.",
-          "bulletPoint": true
         }
       ]
     }
   ],
   "profile": {
     "lines": [
-      "Ancient Rome, Roman Empire",
-      "Roman",
-      "+39 34 78 00 90 66",
-      "redacted@gmail.com"
+     
+      "📍Bournemouth, United Kingdom",
+      "+44 75 76 411 461",
+      "miguelsalvadorstudios@gmail.com"
     ],
     "links": [
-      { "type": "LinkedIn", "link": "linkedin.com/in/redacted" },
-      { "type": "GitHub", "link": "github.com/redacted" },
-      { "type": "Twitter", "link": "x.com/redacted" },
-      { "type": "Website", "link": "website/portfolio" }
+      { "type": "LinkedIn", "link": "www.linkedin.com/in/miguel-salvador19" },
+      { "type": "GitHub", "link": "https://github.com/MFRS" },
+      { "type": "Twitter", "link": "https://x.com/miguelweb19" },
+      { "type": "Website", "link": "https://miguelinweb.netlify.app/" }
     ]
   },
   "technical": [
     {
       "category": "Languages",
       "bubbles": [
-        "TypeLorem",
-        "JavaScript",
         "Python",
-        "Scribae",
-        "Architecture"
+        "Javascript",
+        "Typescript",
+        "Golang"
+        
       ]
     },
     {
       "category": "Web Servers / APIs",
-      "bubbles": ["Ipsum.js", "Django", "Flask", "ClassQL", "Nest.js"]
+      "bubbles": ["Node.js", "Django", "Flask", "React", "MongoDB"]
     }
   ],
   "languages": [
-    { "language": "Latin", "abbreviation": "LT", "level": "Native" },
-    { "language": "Greek", "abbreviation": "GK", "level": "Native" }
+    { "language": "Portuguese", "abbreviation": "PT", "level": "Native" },
+    { "language": "English", "abbreviation": "EN", "level": "Native" },
+    { "language": "Spanish", "abbreviation": "ES", "level": "Proficient" }
   ],
   "education": [
     {
-      "degree": "MBA Lopsuming",
-      "school": "Universitae",
-      "location": "Athens, Roman Empire",
-      "years": "2014-2015"
-    },
-    {
-      "degree": "Lopsum's degree",
-      "school": "School Athens",
-      "location": "Athens, Roman Empire",
-      "years": "2009-2014"
+      "degree": "BA Hons Game Development",
+      "school": "University of Cumbria",
+      "location": "Carlisle, United Kingdom",
+      "years": "2013-2016"
     }
   ]
 }

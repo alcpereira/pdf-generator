@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext",                                  
+    "lib": ["DOM","ESNext"],                                         
+    "module": "ESNext",                                 
+    "outDir": "lib",                                  
+    "esModuleInterop": true,                            
+    "forceConsistentCasingInFileNames": true,           
+    "strict": true,                                     
+          "noUncheckedIndexedAccess": true,                 
+    "skipLibCheck": true                                 
+  },
+  "include": ["src/**/*"]
+}

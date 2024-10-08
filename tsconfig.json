@@ -18,6 +18,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true, // Disallow unchecked access to indexed properties
+
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
