@@ -6,12 +6,12 @@
 }
 
 .category__title {
-  font-weight: 700;
-  font-size: 18px;
+  font-size: var(--category-title-font-size);
+  font-weight: var(--category-title-font-weight);
 }
 .category__subtitle {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--category-subtitle-font-size);
+  font-weight: var(--category-subtitle-font-weight);
 }
 
 .category__data {
@@ -23,7 +23,7 @@
 .category__bubbles {
   display: flex;
   gap: 0.5em;
-  font-size: 12px;
+  font-size: var(--category-bubble-font-size);
 }
 
 .category__lines {
@@ -34,7 +34,7 @@
   margin: 0;
 
   li {
-    font-size: 14px;
+    font-size: var(--category-lines-font-size);
   }
 }
 

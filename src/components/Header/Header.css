@@ -7,8 +7,8 @@
 
 .header__lines > p {
   margin: 0;
-  color: var(--color-neutral-400);
-  font-size: 20px;
+  color: var(--header-line-color);
+  font-size: var(--header-line-font-size);
   line-height: 1.3;
 }
 
@@ -16,5 +16,5 @@
   font-family: "Sacramento", cursive;
   line-height: 1.1;
   margin: 0;
-  font-size: 80px;
+  font-size: var(--header-name-font-size);
 }

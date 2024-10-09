@@ -8,13 +8,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  font-size: 14px;
+  font-size: var(--profile-header-font-size);
 }
 
 .profile__header__lines {
   display: flex;
   flex-direction: column;
   gap: 0.125em;
+  font-weight: var(--profile-header-line-font-weight);
 
   p {
     margin: 0;
@@ -34,20 +35,20 @@
 }
 
 .profile__education-school {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--color-neutral-400);
+  font-weight: var(--profile-edu-school-font-weight);
+  font-size: var(--profile-edu-school-font-size);
+  color: var(--profile-edu-school-color);
 }
 
 .profile__education-years,
 .profile__education-location {
-  color: var(--color-neutral-400);
-  font-size: 14px;
+  color: var(--profile-edu-location-color);
+  font-size: var(--profile-edu-location-font-size);
 }
 
 .profile__education-degree {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--profile-edu-degree-font-size);
+  font-weight: var(--profile-edu-degree-font-weight);
 }
 
 .profile__education-container {
@@ -60,10 +61,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.25em;
-  font-size: 12px;
+  font-size: var(--profile-skill-bubble-font-size);
 }
 
 .profile__skills-span {
-  font-weight: 500;
-  font-size: 14px;
+  font-size: var(--profile-skill-span-font-size);
+  font-weight: var(--profile-skill-span-font-weight);
 }

@@ -11,4 +11,57 @@
   --color-neutral-200: rgb(94, 90, 94, 0.3);
   --color-neutral-400: rgb(94, 90, 94);
   --color-neutral-900: rgb(20, 20, 20);
+
+  --font-size-80: 80px;
+  --font-size-20: 20px;
+  --font-size-18: 18px;
+  --font-size-14: 14px;
+  --font-size-12: 12px;
+
+  --font-weight-700: 700;
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+
+  --theme-color: var(--color-primary-500);
+
+  --bubble-border-color: var(--color-neutral-400);
+  --bubble-text-color: var(--color-neutral-400);
+
+  --category-title-font-size: var(--font-size-18);
+  --category-title-font-weight: var(--font-weight-700);
+  --category-subtitle-font-size: var(--font-size-14);
+  --category-subtitle-font-weight: var(--font-weight-500);
+  --category-bubble-font-size: var(--font-size-12);
+  --category-lines-font-size: var(--font-size-14);
+
+  --header-line-color: var(--color-neutral-400);
+  --header-line-font-size: var(--font-size-20);
+  --header-name-font-size: var(--font-size-80);
+
+  --profile-lang-level-color: var(--color-neutral-400);
+  --profile-lang-font-size: var(--font-size-14);
+  --profile-abbreviation-font-weight: var(--font-weight-600);
+
+  --profile-header-link-font-size: var(--font-size-14);
+  --profile-header-font-size: var(--font-size-14);
+  --profile-header-line-font-weight: var(--font-weight-500);
+
+  --profile-edu-school-color: var(--color-neutral-400);
+  --profile-edu-school-font-size: var(--font-size-14);
+  --profile-edu-school-font-weight: var(--font-weight-600);
+
+  --profile-edu-location-color: var(--color-neutral-400);
+  --profile-edu-location-font-size: var(--font-size-14);
+
+  --profile-edu-degree-font-size: var(--font-size-16);
+  --profile-edu-degree-font-weight: var(--font-weight-600);
+
+  --profile-skill-bubble-font-size: var(--font-size-12);
+  --profile-skill-span-font-size: var(--font-size-14);
+  --profile-skill-span-font-weight: var(--font-weight-500);
+
+  --separator-color: var(--color-neutral-200);
+
+  --title-color: var(--color-neutral-100);
+  --title-font-weight: var(--font-weight-700);
 }

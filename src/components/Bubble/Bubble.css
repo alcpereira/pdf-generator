@@ -1,6 +1,6 @@
 .bubble {
-  border: 1px solid var(--color-neutral-400);
-  color: var(--color-neutral-400);
+  border: 1px solid var(--bubble-border-color);
+  color: var(--bubble-text-color);
   padding: 0.125em 0.75em;
   border-radius: 1.5em;
   flex-shrink: 0;

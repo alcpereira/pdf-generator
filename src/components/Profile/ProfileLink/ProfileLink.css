@@ -10,6 +10,6 @@
   }
 
   span {
-    font-size: 14px;
+    font-size: var(--profile-header-link-font-size);
   }
 }
