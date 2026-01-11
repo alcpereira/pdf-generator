@@ -1,12 +1,8 @@
-import Separator from "../Separator/Separator";
+import Separator from "~/components/Separator/Separator";
+import { Header as HeaderType } from "~/types/cv.types";
 import "./Header.css";
 
-type HeaderProps = {
-  name: string;
-  resume: string[];
-};
-
-const Header = ({ name, resume }: HeaderProps) => {
+const Header = ({ name, resume }: HeaderType) => {
   return (
     <>
       <div className="header__container">

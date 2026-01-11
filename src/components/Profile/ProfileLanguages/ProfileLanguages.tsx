@@ -1,11 +1,6 @@
-import Title from "../../Title/Title";
+import Title from "~/components/Title/Title";
+import { Language } from "~/types/cv.types";
 import "./ProfileLanguages.css";
-
-export type Language = {
-  language: string;
-  abbreviation: string;
-  level: string;
-};
 
 const ProfileLanguages = ({
   languages,

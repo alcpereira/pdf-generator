@@ -1,0 +1,8 @@
+# Ignore all user configs
+*.config.ts
+
+# Except the base template (fallback with mock data)
+!base.config.ts
+
+# To track your CV in git, uncomment specific files:
+# !my-cv.config.ts

@@ -1,17 +1,9 @@
 import { FaGithub, FaHouseUser, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter, FaBluesky } from "react-icons/fa6";
+import { ProfileLink as ProfileLinkType } from "~/types/cv.types";
 import "./ProfileLink.css";
 
-export type ProfileLinkProps = {
-  /** Only GitHub Twitter LinkedIn Website */
-  type: string;
-  /** Please, use without https:// */
-  link: string;
-  /** Custom display name for the link, if not provided the link address will be displayed */
-  name?: string;
-};
-
-const ProfileLink = ({ type, link, name }: ProfileLinkProps) => {
+const ProfileLink = ({ type, link, name }: ProfileLinkType) => {
   let icon;
 
   switch (type) {

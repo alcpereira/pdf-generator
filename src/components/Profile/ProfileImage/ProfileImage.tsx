@@ -1,4 +1,4 @@
-import useProfilePicture from "../../../hooks/useProfilePicture";
+import useProfilePicture from "~/hooks/useProfilePicture";
 import clsx from "clsx";
 import "./ProfileImage.css";
 

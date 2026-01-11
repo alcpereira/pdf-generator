@@ -1,30 +1,16 @@
-import Bubble from "../Bubble/Bubble";
-import Separator from "../Separator/Separator";
-import Title from "../Title/Title";
+import Bubble from "~/components/Bubble/Bubble";
+import Separator from "~/components/Separator/Separator";
+import Title from "~/components/Title/Title";
+import { WorkExperience, Project } from "~/types/cv.types";
 import "./Category.css";
 
-type Lines = { text: string; bulletPoint: boolean }[];
-
-type WorkExperiences = {
-  position: string;
-  company: string;
-  location: string;
-  type: string;
-  years: string;
-  bubbles: string[];
-  lines: Lines;
-};
-
-type Projects = {
-  name: string;
-  duration: string;
-  bubbles: string[];
-  lines: Lines;
-};
-
-type Data = Projects | WorkExperiences;
+type Data = Project | WorkExperience;
 
 const Category = ({ data }: { data: Data[] }) => {
+  if (!data || data.length === 0) {
+    return null;
+  }
+
   const isProjectSection = "name" in data[0];
 
   const renderSubtitle = (data: Data) => {

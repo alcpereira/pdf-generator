@@ -1,40 +1,28 @@
 import "./Profile.css";
-import Title from "../Title/Title";
-import Bubble from "../Bubble/Bubble";
+import Title from "~/components/Title/Title";
+import Bubble from "~/components/Bubble/Bubble";
 import ProfileImage from "./ProfileImage/ProfileImage";
-import ProfileLanguages, {
-  type Language,
-} from "./ProfileLanguages/ProfileLanguages";
-import ProfileLink, { ProfileLinkProps } from "./ProfileLink/ProfileLink";
+import ProfileLanguages from "./ProfileLanguages/ProfileLanguages";
+import ProfileLink from "./ProfileLink/ProfileLink";
+import {
+  Language,
+  TechnicalCategory,
+  Education,
+  Profile as ProfileType,
+} from "~/types/cv.types";
 
-type TechnicalCategory = {
-  category: string;
-  bubbles: string[];
-};
-
-type Education = {
-  degree: string;
-  school: string;
-  location: string;
-  years: string;
-};
-
-type Data = {
-  profile: {
-    shouldDisplayProfileImage: boolean;
-    lines: string[];
-    links: ProfileLinkProps[];
-  };
-  technical: TechnicalCategory[];
-  languages: Language[];
-  education: Education[];
+type ProfileData = {
+  profile: ProfileType;
+  technical?: TechnicalCategory[];
+  languages?: Language[];
+  education?: Education[];
 };
 
 const ProfileHeader = ({
   lines,
   links,
   shouldDisplayProfileImage,
-}: Data["profile"]) => {
+}: ProfileType) => {
   return (
     <div className="profile__header">
       {shouldDisplayProfileImage && (
@@ -96,13 +84,19 @@ const ProfileEducation = ({ education }: { education: Education[] }) => {
   );
 };
 
-const Profile = ({ data }: { data: Data }) => {
+const Profile = ({ data }: { data: ProfileData }) => {
   return (
     <div className="profile__container">
       <ProfileHeader {...data.profile} />
-      <ProfileSkills technical={data.technical} />
-      <ProfileLanguages languages={data.languages} showAbbreviation={false} />
-      <ProfileEducation education={data.education} />
+      {data.technical && data.technical.length > 0 && (
+        <ProfileSkills technical={data.technical} />
+      )}
+      {data.languages && data.languages.length > 0 && (
+        <ProfileLanguages languages={data.languages} showAbbreviation={false} />
+      )}
+      {data.education && data.education.length > 0 && (
+        <ProfileEducation education={data.education} />
+      )}
     </div>
   );
 };
