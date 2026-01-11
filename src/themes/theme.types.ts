@@ -84,7 +84,9 @@ export interface ComponentStyles {
   profileImageCircular: CSSProperties;
   profileImageBorder: CSSProperties;
   profileContact: CSSProperties;
-  profileContactLine: CSSProperties;
+  profileContactInfo: CSSProperties;
+  profileContactIcon: CSSProperties;
+  profileContactInfoLink: CSSProperties;
   profileLinks?: CSSProperties;
   profileLink: CSSProperties;
   profileLinkIcon: CSSProperties;

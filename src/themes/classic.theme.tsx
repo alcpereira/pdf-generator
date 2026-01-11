@@ -9,7 +9,7 @@ import Separator from "../components/Separator/Separator";
 /**
  * Classic theme styles - maps all CSS from the original design to inline styles
  */
-export const classicStyles: ThemeStyles = {
+const classicStyles: ThemeStyles = {
   // Base color tokens
   ColorPrimary: "rgb(167, 67, 67)",
   ColorSecondary: "rgb(94, 90, 94)",
@@ -179,9 +179,26 @@ export const classicStyles: ThemeStyles = {
     flexDirection: "column",
     gap: "0.125em",
   },
-  profileContactLine: {
+  profileContactInfo: {
     margin: 0,
     fontSize: "14px",
+    display: "flex",
+    alignItems: "center",
+  },
+  profileContactIcon: {
+    marginRight: "0.5em",
+    display: "inline-flex",
+    alignItems: "center",
+    flexShrink: 0,
+  },
+  profileContactInfoLink: {
+    textDecoration: "none",
+    color: "inherit",
+    display: "flex",
+    alignItems: "center",
+    margin: 0,
+    fontSize: "14px",
+    cursor: "default",
   },
   profileLink: {
     padding: "0.125em",
@@ -400,20 +417,41 @@ export function ClassicTheme({ config }: { config: CVConfig }) {
         <div style={classicStyles.layoutTwoColumnRight}>
           <Profile styles={classicStyles}>
             {/* Profile Image */}
-            {config.profile.shouldDisplayProfileImage && (
-              <Profile.Image circular border styles={classicStyles} />
+            {config.profile.image.display && (
+              <Profile.Image
+                circular={config.profile.image.circular}
+                border={config.profile.image.border}
+                styles={classicStyles}
+              />
             )}
 
             {/* Contact Information */}
-            {config.profile.lines && config.profile.lines.length > 0 && (
-              <Profile.Contact styles={classicStyles}>
-                {config.profile.lines.map((line, i) => (
-                  <Profile.ContactLine key={i} styles={classicStyles}>
-                    {line}
-                  </Profile.ContactLine>
-                ))}
-              </Profile.Contact>
-            )}
+            <Profile.Contact styles={classicStyles}>
+              <Profile.ContactInfo
+                field={config.profile.contact.location}
+                type="location"
+                defaultShowIcon={true}
+                styles={classicStyles}
+              />
+              <Profile.ContactInfo
+                field={config.profile.contact.nationality}
+                type="nationality"
+                defaultShowIcon={true}
+                styles={classicStyles}
+              />
+              <Profile.ContactInfo
+                field={config.profile.contact.phone}
+                type="phone"
+                defaultShowIcon={true}
+                styles={classicStyles}
+              />
+              <Profile.ContactInfo
+                field={config.profile.contact.email}
+                type="email"
+                defaultShowIcon={true}
+                styles={classicStyles}
+              />
+            </Profile.Contact>
 
             {/* Links */}
             {config.profile.links && config.profile.links.length > 0 && (
@@ -422,11 +460,12 @@ export function ClassicTheme({ config }: { config: CVConfig }) {
                   <Profile.Link
                     key={i}
                     type={link.type}
-                    href={link.link}
+                    url={link.url}
+                    label={link.label}
+                    showIcon={link.showIcon}
+                    defaultShowIcon={true}
                     styles={classicStyles}
-                  >
-                    {link.name || link.type}
-                  </Profile.Link>
+                  />
                 ))}
               </Profile.Links>
             )}

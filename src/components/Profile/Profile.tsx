@@ -1,8 +1,16 @@
 import type { ReactNode } from "react";
 import type { ThemeStyles } from "~/themes/theme.types";
-import type { ProfileLinkType } from "~/types/cv.types";
+import type { ProfileLinkType, HttpsUrl } from "~/types/cv.types";
 import profileImage from "~/assets/profile.png";
-import { FaGithub, FaHouseUser, FaLinkedin } from "react-icons/fa";
+import {
+  FaGithub,
+  FaHouseUser,
+  FaLinkedin,
+  FaMapMarkerAlt,
+  FaGlobeAmericas,
+  FaPhone,
+  FaEnvelope,
+} from "react-icons/fa";
 import { FaSquareXTwitter, FaBluesky } from "react-icons/fa6";
 
 // Root Profile component
@@ -46,14 +54,94 @@ const ProfileContact = ({ children, styles }: ProfileContactProps) => {
   return <div style={styles.profileContact}>{children}</div>;
 };
 
-// Profile.ContactLine sub-component
-interface ProfileContactLineProps {
-  children: ReactNode;
+/**
+ * Returns the appropriate icon component for each contact type
+ */
+const getContactIcon = (type: string): ReactNode => {
+  switch (type) {
+    case "location":
+      return <FaMapMarkerAlt />;
+    case "nationality":
+      return <FaGlobeAmericas />;
+    case "phone":
+      return <FaPhone />;
+    case "email":
+      return <FaEnvelope />;
+    default:
+      return null;
+  }
+};
+
+/**
+ * Contact field structure matching the new Profile.contact interface
+ */
+interface ContactField {
+  value: string;
+  display: boolean;
+  showIcon?: boolean;
+}
+
+/**
+ * Individual contact information field
+ * Can be rendered as plain text or clickable link
+ * Theme controls layout (vertical lines, horizontal inline, grid, etc.)
+ */
+interface ProfileContactInfoProps {
+  /** The contact field with value and display settings */
+  field: ContactField;
+  /** Type of contact information */
+  type: "location" | "nationality" | "phone" | "email";
+  /** Default value for showIcon if not specified in field */
+  defaultShowIcon?: boolean;
+  /** Theme styles */
   styles: ThemeStyles;
 }
 
-const ProfileContactLine = ({ children, styles }: ProfileContactLineProps) => {
-  return <p style={styles.profileContactLine}>{children}</p>;
+const ProfileContactInfo = ({
+  field,
+  type,
+  defaultShowIcon = false,
+  styles,
+}: ProfileContactInfoProps) => {
+  // Early return if field is set to not display
+  if (!field.display) {
+    return null;
+  }
+
+  // Use field's showIcon if specified, otherwise use default from theme
+  const shouldShowIcon = field.showIcon ?? defaultShowIcon;
+  const icon = shouldShowIcon ? getContactIcon(type) : null;
+
+  // Build href for interactive fields
+  let href: string | undefined;
+  if (type === "phone") {
+    // Sanitize phone for tel: link (remove spaces, dashes, parentheses)
+    // Display: "+1 234 567 8900" → Href: "tel:+12345678900"
+    // eslint-disable-next-line no-useless-escape
+    const sanitized = field.value.replace(/[\s\-\(\)]/g, "");
+    href = `tel:${sanitized}`;
+  } else if (type === "email") {
+    href = `mailto:${field.value}`;
+  }
+
+  const content = (
+    <>
+      {icon && <span style={styles.profileContactIcon}>{icon}</span>}
+      <span>{field.value}</span>
+    </>
+  );
+
+  // Render as link if href exists (email/phone)
+  if (href) {
+    return (
+      <a href={href} style={styles.profileContactInfoLink}>
+        {content}
+      </a>
+    );
+  }
+
+  // Otherwise render as plain text (location/nationality)
+  return <p style={styles.profileContactInfo}>{content}</p>;
 };
 
 // Profile.Links sub-component
@@ -69,12 +157,22 @@ const ProfileLinks = ({ children, styles }: ProfileLinksProps) => {
 // Profile.Link sub-component
 interface ProfileLinkProps {
   type: ProfileLinkType;
-  href: string;
-  children: ReactNode;
+  url: HttpsUrl;
+  label?: string;
+  showIcon?: boolean;
+  /** Default value for showIcon if not specified */
+  defaultShowIcon?: boolean;
   styles: ThemeStyles;
 }
 
-const ProfileLink = ({ type, href, children, styles }: ProfileLinkProps) => {
+const ProfileLink = ({
+  type,
+  url,
+  label,
+  showIcon,
+  defaultShowIcon = false,
+  styles,
+}: ProfileLinkProps) => {
   const getLinkIcon = (type: ProfileLinkType): ReactNode => {
     switch (type) {
       case "GitHub":
@@ -92,15 +190,23 @@ const ProfileLink = ({ type, href, children, styles }: ProfileLinkProps) => {
     }
   };
 
+  // Use showIcon if specified, otherwise use default from theme
+  const shouldShowIcon = showIcon ?? defaultShowIcon;
+
+  // Use label if provided, otherwise use type
+  const displayText = label || type;
+
   return (
     <a
-      href={href.startsWith("http") ? href : `https://${href}`}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       style={styles.profileLink}
     >
-      <span style={styles.profileLinkIcon}>{getLinkIcon(type)}</span>
-      <span style={styles.profileLinkText}>{children}</span>
+      {shouldShowIcon && (
+        <span style={styles.profileLinkIcon}>{getLinkIcon(type)}</span>
+      )}
+      <span style={styles.profileLinkText}>{displayText}</span>
     </a>
   );
 };
@@ -164,7 +270,7 @@ const ProfileTags = ({ children, styles }: ProfileTagsProps) => {
 // Attach sub-components to Profile
 Profile.Image = ProfileImage;
 Profile.Contact = ProfileContact;
-Profile.ContactLine = ProfileContactLine;
+Profile.ContactInfo = ProfileContactInfo;
 Profile.Links = ProfileLinks;
 Profile.Link = ProfileLink;
 Profile.Section = ProfileSection;

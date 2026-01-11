@@ -106,61 +106,158 @@ export type ProfileLinkType =
   | "GitHub"
   | "Twitter"
   | "Website"
+  | "Bluesky"
   | string;
+
+/**
+ * HTTPS URL type - enforces https:// protocol at compile time
+ */
+export type HttpsUrl = `https://${string}`;
 
 /**
  * Profile link entry
  *
  * A clickable link displayed in the profile sidebar.
+ * Links are shown in the order they appear in the array.
+ * To hide a link, simply remove it from the array.
  */
 export interface ProfileLink {
   /**
    * Type of profile link
-   * Common types: "LinkedIn", "GitHub", "Twitter", "Website"
+   * Common types: "LinkedIn", "GitHub", "Twitter", "Website", "Bluesky"
    * Icons will be shown automatically for recognized types
    */
   type: ProfileLinkType;
+
   /**
-   * URL or username/handle
-   * Can be full URL or just the username part
+   * Full HTTPS URL to the profile
+   * MUST start with https:// (enforced at TypeScript level)
    *
    * @example
-   * "linkedin.com/in/johndoe"
-   * "github.com/johndoe"
-   * "x.com/johndoe"
+   * "https://linkedin.com/in/johndoe"
+   * "https://github.com/johndoe"
+   * "https://github.com/alcpereira"  // Shorter format also works
    */
-  link: string;
+  url: HttpsUrl;
+
   /**
-   * Custom display name for the link
+   * Custom display label for the link
    * If not provided, the link type will be displayed
    *
    * @example
-   * name: "My Portfolio" // Instead of "Website"
+   * label: "My Portfolio" // Instead of "Website"
+   * label: "alcpereira" // Custom GitHub display
    */
-  name?: string;
+  label?: string;
+
+  /**
+   * Whether to show an icon for this link
+   * Icons are automatically matched to recognized link types
+   *
+   * Optional - if not specified, uses the theme's default setting
+   */
+  showIcon?: boolean;
+}
+
+/**
+ * Contact field configuration
+ * All contact fields follow this structure for consistency
+ */
+interface ContactField {
+  /** The value to display */
+  value: string;
+
+  /**
+   * Whether to display this field in the CV
+   * Set to false to hide the field without removing the data
+   *
+   * IMPORTANT: Some recruiters require certain fields (like location)
+   * to consider applications. Make conscious decisions about visibility.
+   */
+  display: boolean;
+
+  /**
+   * Whether to show an icon next to this field
+   * Icons: 📍 Location, 🌍 Nationality, 📞 Phone, ✉️ Email
+   *
+   * Optional - if not specified, uses the theme's default setting
+   */
+  showIcon?: boolean;
 }
 
 /**
  * Profile section configuration
  *
- * This section appears in the right sidebar and contains contact info and links.
- * This is a required section.
+ * This section appears in the right sidebar and contains personal
+ * contact information and professional links.
+ *
+ * All contact fields are REQUIRED - you must provide values and explicitly
+ * choose whether to display them. This forces conscious decisions about
+ * what information to share, which varies by region and role.
+ *
+ * Guidelines:
+ *
+ * **IMAGE**
+ * - Some regions/companies expect photos (e.g., some European countries)
+ * - Other regions discourage them to avoid bias (e.g., US, UK)
+ * - Place your photo at: src/assets/profile.png
+ *
+ * **LOCATION**
+ * - Critical for most jobs to assess if you need relocation
+ * - Include at least city and country/state
+ * - Examples: "San Francisco, CA", "London, UK", "Remote, USA"
+ *
+ * **NATIONALITY**
+ * - Relevant for work visa/authorization requirements
+ * - Can use nationality OR work authorization status
+ * - Examples: "American", "EU Citizen", "UK Right to Work", "Canadian PR"
+ * - Set display: false if not relevant for target market
+ *
+ * **PHONE**
+ * - Some recruiters prefer calls for initial contact
+ * - Include country code for international applications
+ * - Will render as clickable tel: link
+ * - Examples: "+1 234 567 8900", "+44 20 7946 0958"
+ *
+ * **EMAIL**
+ * - Primary contact method for most applications
+ * - Use a professional email address
+ * - Will render as clickable mailto: link
+ *
+ * **LINKS**
+ * - Add professional social profiles (LinkedIn, GitHub, etc.)
+ * - Links are shown in array order
+ * - To hide a link, remove it from the array (no display flag needed)
  */
 export interface Profile {
-  /** Whether to display a profile image (photo) */
-  shouldDisplayProfileImage: boolean;
   /**
-   * Contact information lines
-   * Typically includes: location, nationality, phone, email
-   *
-   * @example
-   * ["San Francisco, CA",
-   *  "American",
-   *  "+1 234 567 8900",
-   *  "john.doe@email.com"]
+   * Profile image/photo settings
+   * Image file should be placed at: src/assets/profile.png
    */
-  lines: string[];
-  /** Social media and professional profile links */
+  image: {
+    /** Whether to display the profile image */
+    display: boolean;
+    /** Whether to render the image as a circle (vs square) */
+    circular: boolean;
+    /** Whether to show a border around the image */
+    border: boolean;
+  };
+
+  /**
+   * Contact information
+   * All fields are required - explicitly set display: false to hide
+   */
+  contact: {
+    location: ContactField;
+    nationality: ContactField;
+    phone: ContactField;
+    email: ContactField;
+  };
+
+  /**
+   * Social media and professional profile links
+   * Only include links you want to display (no display flag needed)
+   */
   links: ProfileLink[];
 }
 
@@ -282,22 +379,31 @@ export interface Education {
  *
  * @example
  * ```typescript
- * const config: CVConfig = {
+ * const config = {
  *   header: {
  *     name: "John Doe",
  *     resume: ["Senior Software Engineer", "Full-stack developer with 8 years experience"]
  *   },
  *   profile: {
- *     shouldDisplayProfileImage: true,
- *     lines: ["San Francisco, CA", "+1 234 567 8900", "john@example.com"],
+ *     image: {
+ *       display: true,
+ *       circular: true,
+ *       border: false,
+ *     },
+ *     contact: {
+ *       location: { value: "San Francisco, CA", display: true, showIcon: false },
+ *       nationality: { value: "American", display: false },
+ *       phone: { value: "+1 234 567 8900", display: true },  // Uses theme default for showIcon
+ *       email: { value: "john@example.com", display: true },
+ *     },
  *     links: [
- *       { type: "LinkedIn", link: "linkedin.com/in/johndoe" },
- *       { type: "GitHub", link: "github.com/johndoe" }
+ *       { type: "LinkedIn", url: "https://linkedin.com/in/johndoe" },  // Uses theme default for showIcon
+ *       { type: "GitHub", url: "https://github.com/johndoe" }
  *     ]
  *   },
  *   workExperience: [...],
  *   // other optional sections
- * };
+ * } satisfies CVConfig;
  * ```
  */
 export interface CVConfig {

@@ -1,10 +1,23 @@
 import { z } from "zod";
+import type { HttpsUrl } from "~/types/cv.types";
 
 /**
  * Zod schemas for CV validation
  *
  * These schemas provide runtime validation for CV configs.
  */
+
+/**
+ * Zod schema for HTTPS URLs
+ * Validates URL format and ensures it starts with https://
+ * Returns properly typed HttpsUrl
+ */
+const HttpsUrlSchema = z
+  .string()
+  .url("Invalid URL format")
+  .refine((url): url is HttpsUrl => url.startsWith("https://"), {
+    message: "URL must start with https://",
+  });
 
 const TextLineSchema = z.object({
   text: z.string(),
@@ -18,12 +31,29 @@ const HeaderSchema = z.object({
 
 const ProfileLinkSchema = z.object({
   type: z.string().min(1, "Link type is required"),
-  link: z.string().min(1, "Link URL is required"),
+  url: HttpsUrlSchema,
+  label: z.string().optional(),
+  showIcon: z.boolean().optional(),
+});
+
+const ContactFieldSchema = z.object({
+  value: z.string(),
+  display: z.boolean(),
+  showIcon: z.boolean().optional(),
 });
 
 const ProfileSchema = z.object({
-  shouldDisplayProfileImage: z.boolean(),
-  lines: z.array(z.string()),
+  image: z.object({
+    display: z.boolean(),
+    circular: z.boolean(),
+    border: z.boolean(),
+  }),
+  contact: z.object({
+    location: ContactFieldSchema,
+    nationality: ContactFieldSchema,
+    phone: ContactFieldSchema,
+    email: ContactFieldSchema,
+  }),
   links: z.array(ProfileLinkSchema),
 });
 

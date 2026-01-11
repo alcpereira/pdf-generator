@@ -37,7 +37,7 @@ To create your own CV:
 See configs/README.md for more details.
 `);
 
-export const config: CVConfig = {
+export const config = {
   header: {
     name: "Alex Johnson",
     resume: [
@@ -48,18 +48,55 @@ export const config: CVConfig = {
   },
 
   profile: {
-    shouldDisplayProfileImage: false,
-    lines: [
-      "San Francisco, CA, USA",
-      "American",
-      "+1 (555) 123-4567",
-      "alex.johnson@example.com",
-    ],
+    image: {
+      display: false,
+      circular: true,
+      border: true,
+    },
+    contact: {
+      location: {
+        value: "San Francisco, CA, USA",
+        display: true,
+        showIcon: false, // Override theme default (true) for location
+      },
+      nationality: {
+        value: "American",
+        display: true,
+        showIcon: false, // Override theme default (true) for nationality
+      },
+      phone: {
+        value: "+1 (555) 123-4567",
+        display: true,
+        // showIcon: uses theme default (true)
+      },
+      email: {
+        value: "alex.johnson@example.com",
+        display: true,
+        // showIcon: uses theme default (true)
+      },
+    },
     links: [
-      { type: "LinkedIn", link: "linkedin.com/in/alexjohnson" },
-      { type: "GitHub", link: "github.com/alexjohnson" },
-      { type: "Twitter", link: "x.com/alexjohnson" },
-      { type: "Website", link: "alexjohnson.dev" },
+      {
+        type: "LinkedIn",
+        url: "https://linkedin.com/in/alexjohnson",
+        // showIcon: uses theme default (true)
+      },
+      {
+        type: "GitHub",
+        url: "https://github.com/alexjohnson",
+        // showIcon: uses theme default (true)
+      },
+      {
+        type: "Twitter",
+        url: "https://x.com/alexjohnson",
+        // showIcon: uses theme default (true)
+      },
+      {
+        type: "Website",
+        url: "https://alexjohnson.dev",
+        label: "Portfolio",
+        // showIcon: uses theme default (true)
+      },
     ],
   },
 
@@ -228,6 +265,6 @@ export const config: CVConfig = {
       years: "2013 - 2017",
     },
   ],
-};
+} satisfies CVConfig;
 
 export default config;
