@@ -1,24 +1,23 @@
-import Separator from "../Separator/Separator";
-import "./Header.css";
+import type { ThemeStyles } from "../../themes/theme.types";
 
-type HeaderProps = {
+interface HeaderProps {
   name: string;
   resume: string[];
-};
+  styles: ThemeStyles;
+}
 
-const Header = ({ name, resume }: HeaderProps) => {
+const Header = ({ name, resume, styles }: HeaderProps) => {
   return (
-    <>
-      <div className="header__container">
-        <h1 className="header__name">{name}</h1>
-        <div className="header__lines">
-          {resume.map((line, index) => (
-            <p key={index}>{line}</p>
-          ))}
-        </div>
+    <div style={styles.headerContainer}>
+      <h1 style={styles.headerName}>{name}</h1>
+      <div>
+        {resume.map((line, index) => (
+          <p key={index} style={styles.headerLine}>
+            {line}
+          </p>
+        ))}
       </div>
-      <Separator marginBottom={10} marginTop={5} />
-    </>
+    </div>
   );
 };
 

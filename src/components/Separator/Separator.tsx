@@ -1,13 +1,25 @@
-import "./Separator.css";
+import type { ThemeStyles } from "../../themes/theme.types";
+
+interface SeparatorProps {
+  styles: ThemeStyles;
+  marginTop?: string;
+  marginBottom?: string;
+}
 
 const Separator = ({
-  marginTop = 10,
-  marginBottom = 10,
-}: {
-  marginTop?: number;
-  marginBottom?: number;
-}) => {
-  return <div className="separator" style={{ marginBottom, marginTop }}></div>;
+  styles,
+  marginTop = "0",
+  marginBottom = "0",
+}: SeparatorProps) => {
+  return (
+    <div
+      style={{
+        ...styles.separator,
+        marginTop,
+        marginBottom,
+      }}
+    />
+  );
 };
 
 export default Separator;

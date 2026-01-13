@@ -1,110 +1,282 @@
-import "./Profile.css";
-import Title from "../Title/Title";
-import Bubble from "../Bubble/Bubble";
-import ProfileImage from "./ProfileImage/ProfileImage";
-import ProfileLanguages, {
-  type Language,
-} from "./ProfileLanguages/ProfileLanguages";
-import ProfileLink, { ProfileLinkProps } from "./ProfileLink/ProfileLink";
+import type { ReactNode } from "react";
+import type { ThemeStyles } from "~/themes/theme.types";
+import type { ProfileLinkType, HttpsUrl } from "~/types/cv.types";
+import profileImage from "~/assets/profile.png";
+import {
+  FaGithub,
+  FaHouseUser,
+  FaLinkedin,
+  FaMapMarkerAlt,
+  FaGlobeAmericas,
+  FaPhone,
+  FaEnvelope,
+} from "react-icons/fa";
+import { FaSquareXTwitter, FaBluesky } from "react-icons/fa6";
 
-type TechnicalCategory = {
-  category: string;
-  bubbles: string[];
+// Root Profile component
+interface ProfileProps {
+  children: ReactNode;
+  styles: ThemeStyles;
+}
+
+const Profile = ({ children, styles }: ProfileProps) => {
+  return <div style={styles.profileContainer}>{children}</div>;
 };
 
-type Education = {
-  degree: string;
-  school: string;
-  location: string;
-  years: string;
+// Profile.Image sub-component
+interface ProfileImageProps {
+  circular?: boolean;
+  border?: boolean;
+  styles: ThemeStyles;
+}
+
+const ProfileImage = ({ circular, border, styles }: ProfileImageProps) => {
+  let imageStyle = { ...styles.profileImage };
+
+  if (circular) {
+    imageStyle = { ...imageStyle, ...styles.profileImageCircular };
+  }
+
+  if (border) {
+    imageStyle = { ...imageStyle, ...styles.profileImageBorder };
+  }
+
+  return <img src={profileImage} alt="Profile" style={imageStyle} />;
 };
 
-type Data = {
-  profile: {
-    shouldDisplayProfileImage: boolean;
-    lines: string[];
-    links: ProfileLinkProps[];
+// Profile.Contact sub-component
+interface ProfileContactProps {
+  children: ReactNode;
+  styles: ThemeStyles;
+}
+
+const ProfileContact = ({ children, styles }: ProfileContactProps) => {
+  return <div style={styles.profileContact}>{children}</div>;
+};
+
+/**
+ * Returns the appropriate icon component for each contact type
+ */
+const getContactIcon = (type: string): ReactNode => {
+  switch (type) {
+    case "location":
+      return <FaMapMarkerAlt />;
+    case "nationality":
+      return <FaGlobeAmericas />;
+    case "phone":
+      return <FaPhone />;
+    case "email":
+      return <FaEnvelope />;
+    default:
+      return null;
+  }
+};
+
+/**
+ * Contact field structure matching the new Profile.contact interface
+ */
+interface ContactField {
+  value: string;
+  display: boolean;
+  showIcon?: boolean;
+}
+
+/**
+ * Individual contact information field
+ * Can be rendered as plain text or clickable link
+ * Theme controls layout (vertical lines, horizontal inline, grid, etc.)
+ */
+interface ProfileContactInfoProps {
+  /** The contact field with value and display settings */
+  field: ContactField;
+  /** Type of contact information */
+  type: "location" | "nationality" | "phone" | "email";
+  /** Default value for showIcon if not specified in field */
+  defaultShowIcon?: boolean;
+  /** Theme styles */
+  styles: ThemeStyles;
+}
+
+const ProfileContactInfo = ({
+  field,
+  type,
+  defaultShowIcon = false,
+  styles,
+}: ProfileContactInfoProps) => {
+  // Early return if field is set to not display
+  if (!field.display) {
+    return null;
+  }
+
+  // Use field's showIcon if specified, otherwise use default from theme
+  const shouldShowIcon = field.showIcon ?? defaultShowIcon;
+  const icon = shouldShowIcon ? getContactIcon(type) : null;
+
+  // Build href for interactive fields
+  let href: string | undefined;
+  if (type === "phone") {
+    // Sanitize phone for tel: link (remove spaces, dashes, parentheses)
+    // Display: "+1 234 567 8900" → Href: "tel:+12345678900"
+    // eslint-disable-next-line no-useless-escape
+    const sanitized = field.value.replace(/[\s\-\(\)]/g, "");
+    href = `tel:${sanitized}`;
+  } else if (type === "email") {
+    href = `mailto:${field.value}`;
+  }
+
+  const content = (
+    <>
+      {icon && <span style={styles.profileContactIcon}>{icon}</span>}
+      <span>{field.value}</span>
+    </>
+  );
+
+  // Render as link if href exists (email/phone)
+  if (href) {
+    return (
+      <a href={href} style={styles.profileContactInfoLink}>
+        {content}
+      </a>
+    );
+  }
+
+  // Otherwise render as plain text (location/nationality)
+  return <p style={styles.profileContactInfo}>{content}</p>;
+};
+
+// Profile.Links sub-component
+interface ProfileLinksProps {
+  children: ReactNode;
+  styles?: ThemeStyles;
+}
+
+const ProfileLinks = ({ children, styles }: ProfileLinksProps) => {
+  return <div style={styles?.profileLinks}>{children}</div>;
+};
+
+// Profile.Link sub-component
+interface ProfileLinkProps {
+  type: ProfileLinkType;
+  url: HttpsUrl;
+  label?: string;
+  showIcon?: boolean;
+  /** Default value for showIcon if not specified */
+  defaultShowIcon?: boolean;
+  styles: ThemeStyles;
+}
+
+const ProfileLink = ({
+  type,
+  url,
+  label,
+  showIcon,
+  defaultShowIcon = false,
+  styles,
+}: ProfileLinkProps) => {
+  const getLinkIcon = (type: ProfileLinkType): ReactNode => {
+    switch (type) {
+      case "GitHub":
+        return <FaGithub />;
+      case "Twitter":
+        return <FaSquareXTwitter />;
+      case "LinkedIn":
+        return <FaLinkedin />;
+      case "Website":
+        return <FaHouseUser />;
+      case "Bluesky":
+        return <FaBluesky />;
+      default:
+        return <FaHouseUser />;
+    }
   };
-  technical: TechnicalCategory[];
-  languages: Language[];
-  education: Education[];
-};
 
-const ProfileHeader = ({
-  lines,
-  links,
-  shouldDisplayProfileImage,
-}: Data["profile"]) => {
+  // Use showIcon if specified, otherwise use default from theme
+  const shouldShowIcon = showIcon ?? defaultShowIcon;
+
+  // Use label if provided, otherwise use type
+  const displayText = label || type;
+
   return (
-    <div className="profile__header">
-      {shouldDisplayProfileImage && (
-        <ProfileImage circular={true} border={true} />
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={styles.profileLink}
+    >
+      {shouldShowIcon && (
+        <span style={styles.profileLinkIcon}>{getLinkIcon(type)}</span>
       )}
-      <div className="profile__header__lines">
-        {lines.map((line, index) => (
-          <p key={index}>{line}</p>
-        ))}
-      </div>
-      <div className="profile__header__links">
-        {links.map((link, index) => {
-          return <ProfileLink key={index} {...link} />;
-        })}
-      </div>
-    </div>
+      <span style={styles.profileLinkText}>{displayText}</span>
+    </a>
   );
 };
 
-const ProfileSkills = ({ technical }: { technical: TechnicalCategory[] }) => {
-  return (
-    <div className="profile__block-container">
-      <Title text="Technical Skills" />
-      {technical.map((tech, index) => {
-        return (
-          <div className="profile__skills-category" key={index}>
-            <span className="profile__skills-span">{tech.category}</span>
-            <div className="profile__skills-bubbles">
-              {tech.bubbles.map((bubble, b_index) => (
-                <Bubble key={b_index} text={bubble} />
-              ))}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+// Profile.Section sub-component
+interface ProfileSectionProps {
+  children: ReactNode;
+  styles?: ThemeStyles;
+}
+
+const ProfileSection = ({ children, styles }: ProfileSectionProps) => {
+  return <div style={styles?.profileSection}>{children}</div>;
 };
 
-const ProfileEducation = ({ education }: { education: Education[] }) => {
-  return (
-    <div className="profile__block-container">
-      <Title text="Education" />
-      <div className="profile__education-container">
-        {education.map((edu, index) => {
-          return (
-            <div className="profile__education-element" key={index}>
-              <span className="profile__education-degree">{edu.degree}</span>
-              <span className="profile__education-school">{edu.school}</span>
-              <span className="profile__education-location">
-                {edu.location}
-              </span>
-              <span className="profile__education-years">{edu.years}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+// Profile.SectionTitle sub-component
+interface ProfileSectionTitleProps {
+  children: ReactNode;
+  styles: ThemeStyles;
+}
+
+const ProfileSectionTitle = ({
+  children,
+  styles,
+}: ProfileSectionTitleProps) => {
+  return <div style={styles.profileSectionTitle}>{children}</div>;
 };
 
-const Profile = ({ data }: { data: Data }) => {
-  return (
-    <div className="profile__container">
-      <ProfileHeader {...data.profile} />
-      <ProfileSkills technical={data.technical} />
-      <ProfileLanguages languages={data.languages} showAbbreviation={false} />
-      <ProfileEducation education={data.education} />
-    </div>
-  );
+// Profile.Category sub-component
+interface ProfileCategoryProps {
+  children: ReactNode;
+  styles?: ThemeStyles;
+}
+
+const ProfileCategory = ({ children, styles }: ProfileCategoryProps) => {
+  return <div style={styles?.profileCategory}>{children}</div>;
 };
+
+// Profile.CategoryTitle sub-component
+interface ProfileCategoryTitleProps {
+  children: ReactNode;
+  styles: ThemeStyles;
+}
+
+const ProfileCategoryTitle = ({
+  children,
+  styles,
+}: ProfileCategoryTitleProps) => {
+  return <span style={styles.profileCategoryTitle}>{children}</span>;
+};
+
+// Profile.Tags sub-component
+interface ProfileTagsProps {
+  children: ReactNode;
+  styles: ThemeStyles;
+}
+
+const ProfileTags = ({ children, styles }: ProfileTagsProps) => {
+  return <div style={styles.profileTags}>{children}</div>;
+};
+
+// Attach sub-components to Profile
+Profile.Image = ProfileImage;
+Profile.Contact = ProfileContact;
+Profile.ContactInfo = ProfileContactInfo;
+Profile.Links = ProfileLinks;
+Profile.Link = ProfileLink;
+Profile.Section = ProfileSection;
+Profile.SectionTitle = ProfileSectionTitle;
+Profile.Category = ProfileCategory;
+Profile.CategoryTitle = ProfileCategoryTitle;
+Profile.Tags = ProfileTags;
 
 export default Profile;

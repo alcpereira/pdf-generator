@@ -24,8 +24,18 @@ dist-ssr
 *.sw?
 
 # Project related
-output.pdf
+# Generated PDFs (except docs)
+*.pdf
+!docs/*.pdf
+
+# User CV configs (privacy first - configs in configs/.gitignore)
+configs/*.config.ts
+!configs/base.config.ts
+
+# Profile images
 src/assets/profile.*
 # Negative glob pattern to ignore example
 !src/assets/profile.example.png 
+
+# Legacy data file (migrated to configs/)
 src/data.json
